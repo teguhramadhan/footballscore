@@ -1,36 +1,48 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# MatchSection Football Leagues & Matches
 
-## Getting Started
+Project ini adalah sebuah komponen React berbasis Next.js yang menampilkan daftar liga sepakbola dengan fitur pagination dan juga daftar pertandingan (matches) berdasarkan matchday tertentu. Data liga diambil dari API Football-Data.org menggunakan fetch API dengan React Hooks (`useEffect` dan `useState`).
 
-First, run the development server:
+## Fitur Utama
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+- Fetch daftar kompetisi sepakbola dari API Football-Data.org
+- Menampilkan daftar liga terbatas berdasarkan kode liga favorit
+- Pagination untuk menampilkan 10 liga per halaman
+- Menampilkan list pertandingan dengan informasi detail seperti waktu, tim home & away, serta logo tim
+- Responsif dengan TailwindCSS
+- Handling error fetch API dan kondisi loading (opsional bisa ditambah)
+- Menggunakan Environment Variable untuk menyimpan API Key secara aman
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## Struktur Komponen
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+- `MatchSection`: Komponen utama yang menerima props `matches`, `matchday`, dan `teamLogoMap`.
+- Fetching API dilakukan di dalam `useEffect` untuk mengambil data liga dan menyimpan ke state `leagues`.
+- Pagination state mengatur halaman daftar liga yang ditampilkan.
+- Tombol pagination dengan styling yang jelas dan UX yang baik.
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## Cara Pakai
 
-## Learn More
+1. Clone repository ini.
+2. Buat file `.env.local` di root project dan isi dengan API key kamu dari Football-Data.org:
 
-To learn more about Next.js, take a look at the following resources:
+   ```env
+   NEXT_PUBLIC_FOOTBALL_API_KEY=your_api_key_here
+   ```
+3. Jalankan development server:
+   ```bash
+   npm install
+   npm run dev
+   ```
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+4. Import dan gunakan komponen MatchSection di halaman Next.js kamu dengan memberikan props yang diperlukan.
+   ```bash
+   matches={matchesData} // array data pertandingan
+   matchday={currentMatchday} // nomor matchday saat ini
+   teamLogoMap={teamLogoMap} // Map dengan key team id dan value url logo
+   ```
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+   ## Disclaimer
+   Project ini dibuat untuk tujuan pembelajaran dan pengembangan skill pribadi dalam penggunaan Fetch API, React Hooks, dan integrasi API eksternal.
+   Data yang ditampilkan diambil dari Football-Data.org dan tergantung pada API tersebut yang dapat berubah kapan saja. 
+   Jangan gunakan API key asli kamu secara publik tanpa perlindungan, selalu gunakan .env.local dan jangan commit API key ke repositori publik.
+   Jika ada error fetch API, pastikan API key valid dan API endpoint dapat diakses.
+   Project ini bukan aplikasi produksi, melainkan contoh implementasi dan latihan coding.
